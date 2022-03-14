@@ -1,7 +1,9 @@
 package com.example.ebookstore.ui.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -67,11 +69,16 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
+                    setResult(Activity.RESULT_OK);
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                    LoggedInUserView model = loginResult.getSuccess();
+                    updateUiWithUser(model);
+                    Intent intent = getIntent();
+                    intent.putExtra("loggedUserView", model.getDisplayName());
+                    // 设置该SelectCityActivity的结果码，并设置结束之后退回的Activity
+                    setResult(0, intent);
                 }
-                setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
                 finish();

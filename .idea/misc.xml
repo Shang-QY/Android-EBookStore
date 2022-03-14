@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/check_box.xml" value="0.1575" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20643363728470113" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4244791666666667" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.20643363728470113" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2627273559570313" />
+        <entry key="app/src/main/res/layout/cart_list_item.xml" value="0.39243927001953127" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.4329091621870449" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20643363728470113" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20643363728470113" />
+        <entry key="app/src/main/res/layout/simple_adapter.xml" value="0.19934143870314083" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.41794871794871796" />
       </map>
     </option>
