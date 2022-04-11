@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
+	<com.google.android.material.card.MaterialCardView
+		android:id="@+id/book_card"
+		android:layout_width="100dp"
+		android:layout_height="140dp"
+		app:cardElevation="0dp"
+		app:layout_constraintBottom_toTopOf="@+id/text_home"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.497"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:strokeColor="@color/purple_200"
+		app:strokeWidth="1dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<!-- Media -->
+			<ImageView
+				android:id="@+id/book_image"
+				android:layout_width="match_parent"
+				android:layout_height="100dp"
+				android:contentDescription="@string/content_description_media"
+				android:scaleType="centerInside"
+				app:srcCompat="@drawable/fenix" />
+
+			<!-- Title, secondary and supporting text -->
+			<TextView
+				android:id="@+id/book_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"
+				android:text="@string/card_book_title"
+				android:textSize="14sp"
+				android:textAppearance="?attr/textAppearanceHeadline6" />
+
+		</LinearLayout>
+
+	</com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
