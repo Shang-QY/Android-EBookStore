@@ -1,45 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
-
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+    tools:context=".ui.dashboard.DashboardFragment">
 
     <LinearLayout
-        android:layout_width="376dp"
-        android:layout_height="511dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|center_horizontal"
+        android:background="@color/grey"
+        android:orientation="vertical">
 
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home">
+        <!-- 引入banner图片 -->
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/banner" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:weightSum="3" >
+
+            <LinearLayout
+                android:id="@+id/hot_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/hotImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:src="@drawable/hot" />
+
+                <TextView
+                    android:id="@+id/hotText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="畅销"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/news_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/newsImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:src="@drawable/news" />
+
+                <TextView
+                    android:id="@+id/newsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="新书"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/group_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/groupImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:src="@drawable/tuan" />
+
+                <TextView
+                    android:id="@+id/groupText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="团购"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <GridView
             android:id="@+id/grid_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:columnWidth="90dp"
             android:gravity="center"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="20dp"
+            android:layout_marginHorizontal="20dp"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp" />
