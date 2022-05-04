@@ -20,17 +20,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
+                android:paddingTop="20dp"
                 android:orientation="vertical"
                 android:weightSum="5">
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="143dp"
-                    android:layout_height="96dp"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="20dp"
-                    android:layout_weight="3"
-                    android:src="@drawable/unlog" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="143dp"
+                        android:layout_height="96dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/unlog" />
+
+                    <ImageView
+                        android:id="@+id/butterfly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/textView1"

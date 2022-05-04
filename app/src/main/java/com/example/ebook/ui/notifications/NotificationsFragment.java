@@ -1,10 +1,18 @@
 package com.example.ebook.ui.notifications;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -15,13 +23,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.ebook.MainActivity;
 import com.example.ebook.R;
 import com.example.ebook.databinding.FragmentNotificationsBinding;
 import com.example.ebook.ui.login.LoginActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class NotificationsFragment extends Fragment {
 
@@ -33,6 +45,51 @@ public class NotificationsFragment extends Fragment {
     ArrayList<Map<String, Object>> list; // 定义ArrayList
     Map<String, Object> map;
 
+    // 记录蝴蝶ImageView当前的位置
+    private static float curX;
+    private static float curY = 30f;
+    // 记录蝴蝶ImageView下一个位置的坐标
+    private static float nextX;
+    private static float nextY;
+    private static ImageView imageView;
+    private static float screenWidth;
+
+    static class MyHandler extends Handler
+    {
+        private WeakReference<NotificationsFragment> fragment;
+        MyHandler(WeakReference<NotificationsFragment> fragment)
+        {
+            this.fragment = fragment;
+        }
+        @Override
+        public void handleMessage(Message msg)
+        {
+            if (msg.what == 0x123)
+            {
+                // 横向上一直向右飞
+                if (nextX > screenWidth)
+                {
+                    nextX = 0f;
+                    curX = nextX;
+                }
+                else
+                {
+                    nextX += 8f;
+                }
+                // 纵向上可以随机上下
+                nextY = curY + (float)(Math.random() * 10 - 5);
+                // 设置显示蝴蝶的ImageView发生位移改变
+                TranslateAnimation anim = new TranslateAnimation(curX, nextX, curY, nextY);
+                curX = nextX;
+                curY = nextY;
+                anim.setDuration(200);
+                // 开始位移动画
+                imageView.startAnimation(anim);  // ①
+            }
+        }
+    }
+    private Handler handler = new MyHandler(new WeakReference<NotificationsFragment>(this));
+    
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -87,6 +144,25 @@ public class NotificationsFragment extends Fragment {
             textView.setText(loggedUser);
             ImageView image = root.findViewById(R.id.imageView1);
             image.setImageResource(R.drawable.logged);
+
+            // 获取屏幕宽度
+            Point p = new Point();
+            ((Activity) getContext()).getWindowManager().getDefaultDisplay().getSize(p);
+            screenWidth = p.x;
+            // 获取显示蝴蝶的ImageView组件
+            imageView = root.findViewById(R.id.butterfly);
+            imageView.setBackgroundResource(R.drawable.butterfly);
+            AnimationDrawable butterfly = (AnimationDrawable) imageView.getBackground();
+            // 开始播放蝴蝶振翅的逐帧动画
+            butterfly.start();  // ②
+            // 通过定时器控制每0.2秒运行一次TranslateAnimation动画
+            new Timer().schedule(new TimerTask()
+            {
+                @Override public void run()
+                {
+                    handler.sendEmptyMessage(0x123);
+                }
+            }, 0, 200);
         }
     }
 }
