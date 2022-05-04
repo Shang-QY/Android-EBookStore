@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -89,7 +90,31 @@ public class NotificationsFragment extends Fragment {
         }
     }
     private Handler handler = new MyHandler(new WeakReference<NotificationsFragment>(this));
-    
+
+    // 定义播放声音的MediaPlayer
+    private MediaPlayer mPlayer;
+
+    public void startVoice(){
+        if(mPlayer != null && mPlayer.isPlaying()) return;
+        // 创建MediaPlayer对象
+        mPlayer = MediaPlayer.create(this.getContext(), R.raw.beautiful);
+        mPlayer.start();
+
+        // 监听音频播放完的代码，实现音频的自动循环播放
+        mPlayer.setOnCompletionListener(arg0 -> {
+            mPlayer.start();
+            mPlayer.setLooping(true);
+        });
+    }
+
+    public void stopVoice(){
+        if(mPlayer != null){
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -118,6 +143,17 @@ public class NotificationsFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 // 启动指定Activity并等待返回的结果，其中0是请求码，用于标识该请求
                 startActivityForResult(intent, 0);
+            }
+        });
+
+        root.findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                startVoice();
+            }
+        });
+        root.findViewById(R.id.stop).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                stopVoice();
             }
         });
         return root;

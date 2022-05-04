@@ -1,6 +1,9 @@
 package com.example.ebook;
 
+import android.media.MediaPlayer;
+import android.media.VolumeShaper;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
