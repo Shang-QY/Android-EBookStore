@@ -15,5 +15,6 @@
     <string name="login_button">登陆</string>
     <string name="content_description_media">书籍封面</string>
     <string name="card_book_title">书籍名称</string>
+    <string name="user_name">点击登陆</string>
 
 </resources>
