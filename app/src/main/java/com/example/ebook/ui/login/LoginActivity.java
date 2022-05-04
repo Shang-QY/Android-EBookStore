@@ -1,13 +1,17 @@
 package com.example.ebook.ui.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -23,10 +27,19 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.ebook.R;
 import com.example.ebook.databinding.ActivityLoginBinding;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private String rawUserString;
+    // 定义字符串数组，作为提示文本
+    private String[] users = new String[]{};
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +51,20 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
+        preferences = getSharedPreferences("count", Context.MODE_PRIVATE);
+        // 读取SharedPreferences里的count数据
+        rawUserString = preferences.getString("loginUser", null);
+        if(rawUserString != null){
+            users = rawUserString.split(":");
+        }
+
+        // 创建一个ArrayAdapter，封装数组
+        ArrayAdapter loginUsers = new ArrayAdapter(this,
+                android.R.layout.simple_dropdown_item_1line, users);
+        final AutoCompleteTextView usernameEditText = binding.username;
+        // 设置Adapter
+        usernameEditText.setAdapter(loginUsers);
+
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
@@ -77,6 +103,17 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("loggedUserView", model.getDisplayName());
                     // 设置该SelectCityActivity的结果码，并设置结束之后退回的Activity
                     setResult(0, intent);
+
+                    editor = preferences.edit();
+                    if(rawUserString != null){
+                        List<String> tempList = Arrays.asList(users);
+                        if(!tempList.contains(model.getDisplayName())){
+                            editor.putString("loginUser", rawUserString + ":" + model.getDisplayName());
+                        }
+                    } else {
+                        editor.putString("loginUser", model.getDisplayName());
+                    }
+                    editor.apply();
                 }
 
                 //Complete and destroy login activity once successful
