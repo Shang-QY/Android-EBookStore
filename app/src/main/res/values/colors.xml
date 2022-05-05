@@ -17,7 +17,8 @@
     <!-- 褐玫瑰红 -->
     <color name="lightslategrey">#778899</color>
     <!-- 亮蓝灰 -->
-
+    <color name="orange">#F3AF5F</color>
+    <color name="lightred">#ED654E</color>
 <!--    <color name="stroke_color">-->
 <!--        <selector xmlns:android="http://schemas.android.com/apk/res/android">-->
 <!--            <item android:color="?attr/colorPrimary" android:state_checked="true"/>-->

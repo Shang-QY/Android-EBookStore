@@ -1,5 +1,6 @@
 package com.example.ebook.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -19,6 +20,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.ebook.R;
 import com.example.ebook.databinding.FragmentHomeBinding;
+import com.example.ebook.ui.detail.DetailActivity;
+import com.example.ebook.ui.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,10 +64,10 @@ public class HomeFragment extends Fragment {
         //广告轮播图*******************
         imageResId = new int[] { R.drawable.book1, R.drawable.book2, R.drawable.book3, R.drawable.book4 };
         titles = new String[imageResId.length];
-        titles[0] = "快乐学童，童书五折起！";
-        titles[1] = "再读经典，我不怕这漫长黑夜";
-        titles[2] = "魔力的胎动重磅来袭";
-        titles[3] = "斯诺登事件纪实";
+        titles[0] = "新书抢鲜看";
+        titles[1] = "图书5折封顶";
+        titles[2] = "极价书屋";
+        titles[3] = "阅读悦快乐";
 
         imageViews = new ArrayList<>();
 
@@ -107,6 +110,16 @@ public class HomeFragment extends Fragment {
                 new int[]{R.id.book_name, R.id.book_image});
 
         mGridView.setAdapter(simpleAdapter);
+
+        mGridView.setOnItemClickListener((parent, view, position, id) -> {
+            // 创建一个Bundle对象
+            Bundle data = new Bundle();
+            data.putSerializable("name", names[position]);
+            data.putSerializable("image", images[position]);
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtras(data);
+            startActivity(intent);
+        });
         //****************************
 
         return root;

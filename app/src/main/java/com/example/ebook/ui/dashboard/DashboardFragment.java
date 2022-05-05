@@ -1,5 +1,6 @@
 package com.example.ebook.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ebook.R;
 import com.example.ebook.databinding.FragmentDashboardBinding;
+import com.example.ebook.ui.detail.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,14 +55,15 @@ public class DashboardFragment extends Fragment {
                 new int[] { R.id.book_image, R.id.book_name, R.id.author_name, R.id.cost });
         person_list.setAdapter(adapter);
 
-//        root.findViewById(R.id.loginLy).setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View arg0) {
-//                // TODO Auto-generated method stub
-//                Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                // 启动指定Activity并等待返回的结果，其中0是请求码，用于标识该请求
-//                startActivityForResult(intent, 0);
-//            }
-//        });
+        person_list.setOnItemClickListener((parent, view, position, id) -> {
+            // 创建一个Bundle对象
+            Bundle data = new Bundle();
+            data.putSerializable("name", book_name[position]);
+            data.putSerializable("image", book_image[position]);
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtras(data);
+            startActivity(intent);
+        });
 
         return root;
     }
