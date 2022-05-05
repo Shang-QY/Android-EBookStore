@@ -18,5 +18,6 @@
     <string name="user_name">点击登陆</string>
     <string name="stop">关闭背景音乐</string>
     <string name="start">打开背景音乐</string>
+    <string name="permisssion_tip">您必须授予用户管理媒体数据的权限</string>
 
 </resources>
