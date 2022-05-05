@@ -46,13 +46,11 @@ public class HomeFragment extends Fragment {
     };
 
     private FragmentHomeBinding binding;
-    private final String[] names = new String[]{"凤凰架构", "计算机系统", "凤凰架构",
-            "计算机系统", "凤凰架构", "计算机系统", "凤凰架构", "计算机系统", "凤凰架构",
-            "计算机系统", "凤凰架构"};
+    private final String[] names = new String[]{"凤凰架构", "计算机系统", "MySQL实战",
+            "精通Java微服务", "Python编程", "深入理解JVM", "凤凰架构", "计算机系统", "Python编程"};
     private final int[] images = new int[]{R.drawable.fenix, R.drawable.csapp,
-            R.drawable.fenix, R.drawable.csapp, R.drawable.fenix, R.drawable.csapp,
-            R.drawable.fenix, R.drawable.csapp, R.drawable.fenix, R.drawable.csapp,
-            R.drawable.fenix};
+            R.drawable.mysql, R.drawable.java, R.drawable.python, R.drawable.jvm,
+            R.drawable.fenix, R.drawable.csapp, R.drawable.python};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
